@@ -6,7 +6,7 @@ services:
       - "8000:3000"
     volumes:
       - .:/app
-    command: ['npx', "nodemon", "index.js"]
+    command: ['npm', "run", "dev"]
     restart: unless-stopped
   chat-mysql:
     image: mysql:9.0
