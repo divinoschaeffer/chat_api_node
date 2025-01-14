@@ -1,10 +1,12 @@
 import {Request, Response} from "express";
 import createUserSchema from "../../../validationSchema/createUserSchema";
+import {handleRegister} from "./registerService";
 
 export const register = async (req: Request, res: Response) => {
     const schema = req.body;
     try {
-        const value = await createUserSchema.validateAsync(schema);
+        const result:any = await createUserSchema.validateAsync(schema);
+        const user = handleRegister(result)
         res.send("Hey heu");
     } catch (error: any) {
         if (error.isJoi) {
