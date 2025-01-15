@@ -34,7 +34,6 @@ const config: { [key: string]: Knex.Config } = {
       directory: "./db/migrations"
     }
   }
-
 };
 
 export default config
