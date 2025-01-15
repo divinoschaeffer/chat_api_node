@@ -9,6 +9,12 @@ export const isExisting = async (userName: string, userEmail: string): Promise<b
     return result.length !== 0;
 }
 
+export const getUserByEmail = async (email: string): Promise<User|undefined> => {
+    return database<User>('users')
+        .where('email', email)
+        .first();
+}
+
 export const store = async (user: User): Promise<User> => {
     const result: number[] = await database<User>('users')
         .insert({
