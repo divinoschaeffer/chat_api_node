@@ -1,4 +1,4 @@
-class AlreadyExists extends Error {
+export class AlreadyExists extends Error {
     constructor(msg: string) {
         super(msg);
         Object.setPrototypeOf(this, AlreadyExists.prototype);
