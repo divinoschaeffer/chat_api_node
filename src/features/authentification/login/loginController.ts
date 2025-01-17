@@ -20,7 +20,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         if (error.isJoi) {
             res.status(400).json({ message: "Bad Request", details: error.message });
         } else if (error instanceof RessourceNotFoundError) {
-            res.status(404).json({ message: "Ressource not found", details: error.message })
+            res.status(401).json({ message: "Unauthorized - Invalid credentials", details: error.message })
         } else {
             res.status(500).json({ message: "Internal server error", error: error.message });
         }
