@@ -73,9 +73,9 @@ describe("login", () => {
 
         expect(loginSchema.validateAsync).toHaveBeenCalledWith(req.body);
         expect(handleLogin).toHaveBeenCalledWith(req.body);
-        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.status).toHaveBeenCalledWith(401);
         expect(res.json).toHaveBeenCalledWith({
-            message: "Ressource not found",
+            message: "Unauthorized - Invalid credentials",
             details: notFoundError.message,
         });
     });
