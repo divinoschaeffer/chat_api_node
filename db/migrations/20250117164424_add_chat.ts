@@ -8,6 +8,8 @@ export async function up(knex: Knex): Promise<void> {
         table.integer('creator_id')
             .notNullable()
             .unsigned();
+        table.string('name')
+            .notNullable();
         table
             .enum('type', ['GROUP','PRIVATE'])
             .notNullable()
