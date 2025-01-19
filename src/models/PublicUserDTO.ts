@@ -4,7 +4,7 @@ import {User} from "./User";
  * @swagger
  * components:
  *   schemas:
- *     UserDTO:
+ *     PublicUserDTO:
  *       type: object
  *       properties:
  *         id:

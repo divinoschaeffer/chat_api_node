@@ -10,7 +10,7 @@ export const createChat = async (req: Request, res: Response): Promise<void> => 
     try {
         const result = await createChatSchema.validateAsync(schema);
         const chat: Chat = await handleCreateChat(result);
-        res.json(chat);
+        res.status(201).json(chat);
     } catch (error: any) {
         if (error.isJoi) {
             res.status(400).json({ message: "Bad Request", details: error.message});
