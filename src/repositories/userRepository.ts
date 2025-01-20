@@ -43,3 +43,14 @@ export const store = async (user: User): Promise<User> => {
 
     return userResult;
 }
+
+export const getUserColumns = (): string[] => {
+    return [
+        'users.id as user_id',
+        'users.name as user_name',
+        'users.email as user_email',
+        'users.password as user_password',
+        'users.admin as user_admin',
+        'users.created_at as user_created_at'
+    ]
+}

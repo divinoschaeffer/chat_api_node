@@ -1,5 +1,6 @@
 import {Router} from "express";
 import {createChat} from "../features/chat/create/createChatController";
+import {getChat} from "../features/chat/get/getChatController";
 
 const chatRouter: Router = Router();
 
@@ -80,5 +81,7 @@ const chatRouter: Router = Router();
  *                   example: "An unexpected error occurred."
  */
 chatRouter.post('', createChat);
+
+chatRouter.get('/:chatId', getChat);
 
 export default chatRouter;

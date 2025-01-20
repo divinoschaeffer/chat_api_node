@@ -1,6 +1,8 @@
 import {Chat} from "../models/Chat";
 import database from "../database";
 import {PublicUserDTO} from "../models/PublicUserDTO";
+import {getUserColumns} from "./userRepository";
+import {chatFromDB} from "./factories/chatFactory";
 
 export const isExisting = async (users_id: number[]): Promise<boolean> => {
     if (users_id.length === 0) {
@@ -62,3 +64,24 @@ export const store = async (chat: Chat): Promise<Chat> => {
         }
     });
 };
+
+export const getChatById = async (chatId: number): Promise<Chat|null> => {
+    const result = await database('chats')
+        .select(getChatColumns())
+        .leftJoin('users_chats', 'users_chats.chat_id', '=', 'chats.id')
+        .leftJoin('users', 'users.id', '=', 'users_chats.user_id')
+        .where('chats.id', chatId)
+
+    return chatFromDB(result);
+}
+
+export const getChatColumns = (): string[] => {
+    return [
+        ...getUserColumns(),
+        'chats.id as chat_id',
+        'chats.name as chat_name',
+        'chats.type as chat_type',
+        'chats.creator_id as creator_id',
+        'chats.created_at as created_at',
+    ];
+}
