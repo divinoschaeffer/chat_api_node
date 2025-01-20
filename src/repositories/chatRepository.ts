@@ -59,7 +59,6 @@ export const store = async (chat: Chat): Promise<Chat> => {
 
             return chat;
         } catch (error) {
-            console.error('Transaction failed:', error);
             throw error;
         }
     });

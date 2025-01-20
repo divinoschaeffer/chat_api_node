@@ -4,7 +4,9 @@ import {User} from "../../models/User";
 import {userFromDB} from "./userFactory";
 
 export const chatFromDB = (results: any[]): Chat|null => {
-    if (results.length === 0 ) return null;
+    if (results.length === 0 ) {
+        return null;
+    }
 
     return new Chat(
         results[0].chat_id,
