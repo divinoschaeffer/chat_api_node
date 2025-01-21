@@ -82,6 +82,36 @@ const chatRouter: Router = Router();
  */
 chatRouter.post('', createChat);
 
+/**
+ * @swagger
+ * /api/chat/{chatId}:
+ *   get:
+ *     summary: Retrieve a specific chat by ID
+ *     description: Fetches the chat data for the given chat ID.
+ *     tags:
+ *      - Chat
+ *     parameters:
+ *       - in: path
+ *         name: chatId
+ *         required: true
+ *         description: The ID of the chat to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Chat successfully retrieved
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 chat:
+ *                      $ref: '#/components/schemas/Chat'
+ *       404:
+ *         description: Chat not found
+ *       500:
+ *         description: Server error
+ */
 chatRouter.get('/:chatId', getChat);
 
 export default chatRouter;
