@@ -63,6 +63,7 @@ describe("Chat Repository", () => {
                 creator_id: 1,
                 created_at: new Date(),
                 users: [{ id: 1, name: "JOJO" }, { id: 2, name: "ZOZO" }] as PublicUserDTO[],
+                deleted_at: null
             };
 
             const mockKnexChain = {
@@ -89,6 +90,7 @@ describe("Chat Repository", () => {
                 creator_id: 1,
                 created_at: new Date(),
                 users: [{ id: 1, name: "JOJO" }, { id: 2, name: "ZOZO" }] as PublicUserDTO[],
+                deleted_at: null,
             };
 
             // Mock qui simule l'échec de l'insertion

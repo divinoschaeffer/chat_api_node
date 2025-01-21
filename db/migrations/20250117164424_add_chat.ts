@@ -15,6 +15,7 @@ export async function up(knex: Knex): Promise<void> {
             .notNullable()
             .defaultTo('PRIVATE');
         table.datetime('created_at').defaultTo(null);
+        table.datetime('deleted_at').defaultTo(null);
         table
             .foreign('creator_id')
             .references('users.id')

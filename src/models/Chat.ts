@@ -27,6 +27,11 @@ import {PublicUserDTO} from "./PublicUserDTO";
  *                  format: date-time
  *                  nullable: true
  *                  example: 2025-01-15T08:45:23Z
+ *              deleted_at:
+ *                  type: string
+ *                  format: date-time
+ *                  nullable: true
+ *                  example: 2025-01-15T08:45:23Z
  */
 export class Chat {
     id: number|null;
@@ -35,6 +40,7 @@ export class Chat {
     creator_id: number;
     users: PublicUserDTO[];
     created_at: Date|null;
+    deleted_at: Date|null;
 
     public constructor(
         id: number|null,
@@ -42,7 +48,8 @@ export class Chat {
         name: string,
         creator: number,
         users: PublicUserDTO[],
-        created_at: Date|null = null
+        created_at: Date|null = null,
+        deleted_at: Date|null = null
     ) {
         this.id = id;
         this.type = type;
@@ -50,5 +57,6 @@ export class Chat {
         this.creator_id = creator;
         this.users = users;
         this.created_at = created_at;
+        this.deleted_at = deleted_at;
     }
 }
