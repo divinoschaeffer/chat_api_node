@@ -5,10 +5,10 @@ import {handleCreateChat} from "./createChatService";
 import {Chat} from "../../../models/Chat";
 
 export const createChat = async (req: Request, res: Response): Promise<void> => {
-    const schema = req.body;
+    const chatBody = req.body;
 
     try {
-        const result = await createChatSchema.validateAsync(schema);
+        const result = await createChatSchema.validateAsync(chatBody);
         const chat: Chat = await handleCreateChat(result);
         res.status(201).json(chat);
     } catch (error: any) {

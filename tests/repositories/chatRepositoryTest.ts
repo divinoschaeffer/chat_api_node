@@ -1,5 +1,5 @@
 import database from "../../src/database";
-import {getChatById, getChatColumns, isExisting, store} from "../../src/repositories/chatRepository";
+import {getChatById, getChatColumns, isExisting, store, update} from "../../src/repositories/chatRepository";
 import {Chat} from "../../src/models/Chat";
 import {PublicUserDTO} from "../../src/models/PublicUserDTO";
 import {ChatType} from "../../src/models/ChatType";
@@ -107,6 +107,28 @@ describe("Chat Repository", () => {
             await expect(store(mockChat)).rejects.toThrow('Transaction failed');
         });
     });
+
+    describe("update", () => {
+        it("should update a chat", async () => {
+            const mockChat: Chat = new Chat(1,
+                ChatType.PRIVATE,
+                "HEY",
+                2,
+                [
+                    new PublicUserDTO(2, "JEAN"),
+                    new PublicUserDTO(3, "GABIN")
+                ],
+                new Date()
+            );
+
+            (database as unknown as jest.Mock).mockReturnValueOnce({
+                update: jest.fn().mockReturnThis(),
+                where: jest.fn().mockReturnThis(),
+            });
+
+            await update(mockChat)
+        })
+    })
 
     describe("getChatById", () => {
         it("should return a chat if a matching chat is found", async () => {

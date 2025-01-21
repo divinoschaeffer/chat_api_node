@@ -64,6 +64,12 @@ export const store = async (chat: Chat): Promise<Chat> => {
     });
 };
 
+export const update = async (chat: Chat): Promise<void> => {
+    await database('chats')
+        .update('name', chat.name)
+        .where('id', chat.id!);
+}
+
 export const getChatById = async (chatId: number): Promise<Chat|null> => {
     const result = await database('chats')
         .select(getChatColumns())

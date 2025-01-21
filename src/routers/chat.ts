@@ -1,6 +1,7 @@
 import {Router} from "express";
 import {createChat} from "../features/chat/create/createChatController";
 import {getChat} from "../features/chat/get/getChatController";
+import {updateChat} from "../features/chat/update/updateChatController";
 
 const chatRouter: Router = Router();
 
@@ -113,5 +114,53 @@ chatRouter.post('', createChat);
  *         description: Server error
  */
 chatRouter.get('/:chatId', getChat);
+
+/**
+ * @swagger
+ * /api/chat/{chatId}:
+ *   put:
+ *     summary: Update a specific chat by ID
+ *     description: Updates the chat data for the given chat ID with the provided name.
+ *     tags:
+ *      - Chat
+ *     parameters:
+ *       - in: path
+ *         name: chatId
+ *         required: true
+ *         description: The ID of the chat to update.
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: The new name for the chat.
+ *                 example: "New Chat Name"
+ *     responses:
+ *       200:
+ *         description: Chat successfully updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 chatId:
+ *                   type: string
+ *                 name:
+ *                   type: string
+ *                   description: The updated name of the chat.
+ *       400:
+ *         description: Invalid input
+ *       404:
+ *         description: Chat not found
+ *       500:
+ *         description: Server error
+ */
+chatRouter.put('/:chatId', updateChat);
 
 export default chatRouter;
