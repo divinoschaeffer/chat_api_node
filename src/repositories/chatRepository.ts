@@ -80,6 +80,12 @@ export const getChatById = async (chatId: number): Promise<Chat|null> => {
     return chatFromDB(result);
 }
 
+export const softDelete = async (chatId: number): Promise<void> => {
+    await database('chats')
+        .update('deleted_at', new Date())
+        .where('id', chatId);
+}
+
 export const getChatColumns = (): string[] => {
     return [
         ...getUserColumns(),
