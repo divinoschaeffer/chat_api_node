@@ -15,6 +15,12 @@ export const getUserByEmail = async (email: string): Promise<User|undefined> => 
         .first();
 }
 
+export const getUserById = async (id: number): Promise<User|undefined> => {
+    return database<User>('users')
+        .where('id', id)
+        .first();
+}
+
 export const store = async (user: User): Promise<User> => {
     const result: number[] = await database<User>('users')
         .insert({
@@ -36,4 +42,15 @@ export const store = async (user: User): Promise<User> => {
     }
 
     return userResult;
+}
+
+export const getUserColumns = (): string[] => {
+    return [
+        'users.id as user_id',
+        'users.name as user_name',
+        'users.email as user_email',
+        'users.password as user_password',
+        'users.admin as user_admin',
+        'users.created_at as user_created_at'
+    ]
 }
