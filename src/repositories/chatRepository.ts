@@ -81,9 +81,19 @@ export const getChatById = async (chatId: number): Promise<Chat|null> => {
 }
 
 export const softDelete = async (chatId: number): Promise<void> => {
-    await database('chats')
-        .update('deleted_at', new Date())
-        .where('id', chatId);
+    await database.transaction(async (trx) => {
+        try {
+            await trx('chats')
+                .update('deleted_at', new Date())
+                .where('id', chatId);
+
+            await trx('users_chats')
+                .update('deleted', true)
+                .where('chat_id', chatId);
+        } catch (e: any) {
+            throw e;
+        }
+    })
 }
 
 export const getChatColumns = (): string[] => {

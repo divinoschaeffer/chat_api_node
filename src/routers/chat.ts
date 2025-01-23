@@ -2,6 +2,7 @@ import {Router} from "express";
 import {createChat} from "../features/chat/create/createChatController";
 import {getChat} from "../features/chat/get/getChatController";
 import {updateChat} from "../features/chat/update/updateChatController";
+import {deleteChat} from "../features/chat/softDelete/deleteChatController";
 
 const chatRouter: Router = Router();
 
@@ -162,5 +163,30 @@ chatRouter.get('/:chatId', getChat);
  *         description: Server error
  */
 chatRouter.put('/:chatId', updateChat);
+
+/**
+ * @swagger
+ * /api/chat/{chatId}:
+ *   delete:
+ *     summary: Delete a specific chat by ID
+ *     description: Deletes the chat with the specified chat ID.
+ *     tags:
+ *      - Chat
+ *     parameters:
+ *       - in: path
+ *         name: chatId
+ *         required: true
+ *         description: The ID of the chat to delete.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       204:
+ *         description: Chat successfully deleted (no content).
+ *       404:
+ *         description: Chat not found.
+ *       500:
+ *         description: Server error.
+ */
+chatRouter.delete('/:chatId', deleteChat);
 
 export default chatRouter;
