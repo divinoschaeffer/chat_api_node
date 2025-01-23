@@ -1,5 +1,5 @@
 import database from "../../src/database";
-import {getChatById, getChatColumns, isExisting, store, update} from "../../src/repositories/chatRepository";
+import {getChatById, getChatColumns, isExisting, softDelete, store, update} from "../../src/repositories/chatRepository";
 import {Chat} from "../../src/models/Chat";
 import {PublicUserDTO} from "../../src/models/PublicUserDTO";
 import {ChatType} from "../../src/models/ChatType";
@@ -217,6 +217,35 @@ describe("Chat Repository", () => {
                 "chats.creator_id as creator_id",
                 "chats.created_at as created_at",
             ]);
+        });
+    });
+
+    describe("softDelete", () => {
+        const mockKnexChain = {
+            update: jest.fn().mockReturnThis(),
+            where: jest.fn().mockReturnThis(),
+        };
+
+        const trx = jest.fn().mockImplementation(() => mockKnexChain);
+
+        beforeEach(() => {
+            jest.clearAllMocks();
+
+            (database.transaction as jest.Mock).mockImplementationOnce(async (trxCallback) => {
+                return trxCallback(trx);
+            });
+        });
+
+        it("should soft delete a chat and its user associations", async () => {
+            const chatId = 1;
+
+            await softDelete(chatId);
+
+            expect(mockKnexChain.update).toHaveBeenCalledWith("deleted_at", expect.any(Date));
+            expect(mockKnexChain.where).toHaveBeenCalledWith("id", chatId);
+
+            expect(mockKnexChain.update).toHaveBeenCalledWith("deleted", true);
+            expect(mockKnexChain.where).toHaveBeenCalledWith("chat_id", chatId);
         });
     });
 });
