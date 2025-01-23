@@ -1,4 +1,4 @@
-import { isExisting, getUserByEmail, store } from "../../src/repositories/userRepository";
+import {isExisting, getUserByEmail, store, getUserColumns} from "../../src/repositories/userRepository";
 import database from "../../src/database";
 import { User } from "../../src/models/User";
 
@@ -116,4 +116,17 @@ describe("userRepository", () => {
             expect(mockDatabase.where).toHaveBeenCalledWith("id", mockInsertResult[0]);
         });
     });
+
+    describe("getUserColumns", () => {
+        it("should get columns", async () => {
+            expect(getUserColumns()).toEqual([
+                'users.id as user_id',
+                'users.name as user_name',
+                'users.email as user_email',
+                'users.password as user_password',
+                'users.admin as user_admin',
+                'users.created_at as user_created_at'
+            ])
+        })
+    })
 });
