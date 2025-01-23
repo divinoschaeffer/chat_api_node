@@ -27,6 +27,7 @@ export async function up(knex: Knex): Promise<void> {
         table.increments('id');
         table.integer('user_id').unsigned();
         table.integer('chat_id').unsigned();
+        table.boolean('deleted').defaultTo(false);
         table
             .foreign('user_id')
             .references('users.id')
