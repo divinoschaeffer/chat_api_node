@@ -3,6 +3,7 @@ import {createChat} from "../features/chat/create/createChatController";
 import {getChat} from "../features/chat/get/getChatController";
 import {updateChat} from "../features/chat/update/updateChatController";
 import {deleteChat} from "../features/chat/softDelete/deleteChatController";
+import messageRouter from "./message";
 
 const chatRouter: Router = Router();
 
@@ -188,5 +189,7 @@ chatRouter.put('/:chatId', updateChat);
  *         description: Server error.
  */
 chatRouter.delete('/:chatId', deleteChat);
+
+chatRouter.use('/:chatId/message', messageRouter);
 
 export default chatRouter;
