@@ -77,7 +77,7 @@ export const getMessageById = async (messageId: number): Promise<Message|null> =
         .where('deleted_at', null);
 
     const list: Message[] = messagesFromDbList(result);
-    return list.length === 0 ? null : list[0];
+    return (list === undefined || list.length === 0) ? null : list[0];
 }
 
 export const getMessageColumns = (): string[] => {
