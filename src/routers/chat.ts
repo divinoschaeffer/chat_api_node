@@ -151,11 +151,8 @@ chatRouter.get('/:chatId', getChat);
  *             schema:
  *               type: object
  *               properties:
- *                 chatId:
- *                   type: string
- *                 name:
- *                   type: string
- *                   description: The updated name of the chat.
+ *                 chat:
+ *                      $ref: '#/components/schemas/Chat'
  *       400:
  *         description: Invalid input
  *       404:
