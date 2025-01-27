@@ -5,7 +5,7 @@ import {PublicUserDTO} from "../../../models/PublicUserDTO";
 export const searchUserController = async (req: Request, res: Response): Promise<void> => {
     const userName: string = req.params.userName;
 
-    if (userName === undefined) {
+    if (userName === '') {
         res.status(400).json({message: "Params userName undefined"});
     }
 
