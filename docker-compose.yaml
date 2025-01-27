@@ -6,6 +6,7 @@ services:
       - "8000:3636"
     volumes:
       - .:/app
+      - chat_uploads:/app/uploads
     command: ['npm', "run", "dev"]
     restart: unless-stopped
   chat-mysql:
@@ -24,3 +25,4 @@ services:
 
 volumes:
   mysql_data:
+  chat_uploads:

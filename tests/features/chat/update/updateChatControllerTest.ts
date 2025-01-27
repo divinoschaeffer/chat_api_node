@@ -19,7 +19,7 @@ describe("updateChat", () => {
 
         req = {
             params: { chatId: "1" },
-            body: { name: "Updated chat message" },
+            body: { name: "Updated chat message.ts" },
         };
         res = {
             status: statusMock,
@@ -28,7 +28,7 @@ describe("updateChat", () => {
     });
 
     it("should successfully update the chat", async () => {
-        const mockChat = { id: 1, message: "Updated chat message" };
+        const mockChat = { id: 1, message: "Updated chat message.ts" };
 
         (updateChatSchema.validateAsync as jest.Mock).mockResolvedValue(req.body);
         (handleUpdateChat as jest.Mock).mockResolvedValue(mockChat);
