@@ -3,8 +3,8 @@ import {handleListingMessage} from "./listingMesssageService";
 
 export const listingMessageController = async  (req: Request, res: Response): Promise<void> => {
     const chatId: number = parseInt(req.params.chatId);
-    const limit: number = parseInt(<string>req.query.limit) ?? 0;
-    const offset: number = parseInt(<string>req.query.offset) ?? 0;
+    const limit: number = req.query.limit ? parseInt(<string>req.query.limit) : 0;
+    const offset: number = req.query.offset ? parseInt(<string>req.query.offset) : 0;
 
     if (isNaN(chatId)) {
         res.status(400).json({ message: "Invalid chat ID. Must be a number." });
