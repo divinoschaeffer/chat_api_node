@@ -15,6 +15,12 @@ export const getUserByEmail = async (email: string): Promise<User|undefined> => 
         .first();
 }
 
+export const getUserByName = async (userName: string): Promise<User|undefined> => {
+    return database<User>('users')
+        .where('name', userName)
+        .first();
+}
+
 export const getUserById = async (id: number): Promise<User|undefined> => {
     return database<User>('users')
         .where('id', id)
