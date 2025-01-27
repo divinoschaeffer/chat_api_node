@@ -120,7 +120,7 @@ chatRouter.get('/:chatId', getChat);
 /**
  * @swagger
  * /api/chat/{chatId}:
- *   put:
+ *   patch:
  *     summary: Update a specific chat by ID
  *     description: Updates the chat data for the given chat ID with the provided name.
  *     tags:
@@ -160,7 +160,7 @@ chatRouter.get('/:chatId', getChat);
  *       500:
  *         description: Server error
  */
-chatRouter.put('/:chatId', updateChat);
+chatRouter.patch('/:chatId', updateChat);
 
 /**
  * @swagger
