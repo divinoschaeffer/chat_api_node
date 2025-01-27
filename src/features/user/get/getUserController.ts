@@ -1,8 +1,8 @@
 import {Response, Request} from "express";
-import {handleSearchUser} from "./searchUserService";
+import {handleSearchUser} from "./getUserService";
 import {PublicUserDTO} from "../../../models/PublicUserDTO";
 
-export const searchUserController = async (req: Request, res: Response): Promise<void> => {
+export const getUserController = async (req: Request, res: Response): Promise<void> => {
     const userName: string = req.params.userName;
 
     if (userName === '') {

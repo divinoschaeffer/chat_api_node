@@ -1,8 +1,8 @@
 import {Router} from "express";
-import {searchUserController} from "../features/user/search/searchUserController";
+import {getUserController} from "../features/user/get/getUserController";
 
 const userRouter: Router = Router();
 
-userRouter.get('/search/:userName', searchUserController);
+userRouter.get('/:userName', getUserController);
 
 export default userRouter;
