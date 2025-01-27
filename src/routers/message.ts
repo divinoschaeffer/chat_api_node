@@ -112,6 +112,29 @@ messageRouter.post('', upload.array('images', 2), createMessage);
  */
 messageRouter.get('', listingMessageController);
 
+/**
+ * @swagger
+ * /api/chat/{chatId}/message/{messageId}:
+ *   delete:
+ *     summary: Delete a specific message by ID
+ *     description: Deletes a message with the specified message ID.
+ *     tags:
+ *       - Message
+ *     parameters:
+ *       - in: path
+ *         name: messageId
+ *         required: true
+ *         description: The ID of the message to delete.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       204:
+ *         description: Message successfully deleted (no content).
+ *       404:
+ *         description: Message not found.
+ *       500:
+ *         description: Server error.
+ */
 messageRouter.delete('/:messageId', deleteMessageController);
 
 export default messageRouter;
