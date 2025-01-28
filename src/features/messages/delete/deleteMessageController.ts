@@ -2,7 +2,7 @@ import {Response, Request} from "express";
 import {handleDeleteMessage} from "./deleteMessageService";
 
 export const deleteMessageController = async (req: Request, res: Response): Promise<void> => {
-    const messageId: number = parseInt(req.params.messageId);
+    const messageId: number = parseInt(req.params.message_id);
 
     if (isNaN(messageId)) {
         res.status(400).json({ message: "Invalid message ID. Must be a number." });

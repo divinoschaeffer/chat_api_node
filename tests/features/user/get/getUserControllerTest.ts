@@ -12,7 +12,7 @@ describe("searchUserController", () => {
     beforeEach(() => {
         req = {
             params: {
-                userName: "testUser",
+                user_name: "testUser",
             },
         };
         res = {
@@ -26,7 +26,7 @@ describe("searchUserController", () => {
     });
 
     it("should return 400 if userName parameter is undefined", async () => {
-        req.params!.userName = '';
+        req.params!.user_name = '';
 
         await getUserController(req as Request, res as Response);
 

@@ -4,7 +4,7 @@ import {handleGetChat} from "./getChatService";
 import {RessourceNotFoundError} from "../../../utils/RessourceNotFoundError";
 
 export const getChat = async (req: Request, res: Response): Promise<void> => {
-    const chatId: number = parseInt(req.params.chatId);
+    const chatId: number = parseInt(req.params.chat_id);
 
     if (isNaN(chatId)) {
         res.status(400).json({ message: "Invalid chat ID. Must be a number." });

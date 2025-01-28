@@ -5,7 +5,7 @@ import {RessourceNotFoundError} from "../../../utils/RessourceNotFoundError";
 import {Message} from "../../../models/Message";
 
 export const createMessage = async (req: Request, res: Response): Promise<void> => {
-    const chatId: number = parseInt(req.params.chatId);
+    const chatId: number = parseInt(req.params.chat_id);
     const messageBody = req.body;
     const files = req.files as Express.Multer.File[] ?? [];
 

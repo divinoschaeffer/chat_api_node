@@ -3,7 +3,7 @@ import {handleSearchUser} from "./getUserService";
 import {PublicUserDTO} from "../../../models/PublicUserDTO";
 
 export const getUserController = async (req: Request, res: Response): Promise<void> => {
-    const userName: string = req.params.userName;
+    const userName: string = req.params.user_name;
 
     if (userName === '') {
         res.status(400).json({message: "Params userName undefined"});

@@ -15,7 +15,7 @@ describe("deleteChat Controller", () => {
         statusMock = jest.fn().mockReturnThis();
         jsonMock = jest.fn();
 
-        req = { params: { chatId: "1" } };
+        req = { params: { chat_id: "1" } };
         res = {
             status: statusMock,
             json: jsonMock,
@@ -33,7 +33,7 @@ describe("deleteChat Controller", () => {
     });
 
     it("should return 400 if the chatId is not a valid number", async () => {
-        req.params!.chatId = "abc";
+        req.params!.chat_id = "abc";
 
         await deleteChat(req as Request, res as Response);
 

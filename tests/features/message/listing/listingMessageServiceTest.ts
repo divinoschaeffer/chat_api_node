@@ -1,4 +1,4 @@
-import {handleListingMessage} from "../../../../src/features/messages/listing/listingMesssageService";
+import {handleListingMessage} from "../../../../src/features/messages/listing/listingMessageService";
 import {getChatById} from "../../../../src/repositories/chatRepository";
 import {count, list} from "../../../../src/repositories/messageRepository";
 import {RessourceNotFoundError} from "../../../../src/utils/RessourceNotFoundError";

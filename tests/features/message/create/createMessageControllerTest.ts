@@ -15,7 +15,7 @@ describe("createMessage", () => {
     beforeEach(() => {
         req = {
             params: {
-                chatId: "123"
+                chat_id: "123"
             },
             body: { content: "Hello World" },
             files: []
@@ -27,7 +27,7 @@ describe("createMessage", () => {
     });
 
     it("should return 400 if chatId is not a valid number", async () => {
-        req.params!.chatId = "invalid";
+        req.params!.chat_id = "invalid";
         await createMessage(req as Request, res as Response);
         expect(res.status).toHaveBeenCalledWith(400);
         expect(res.json).toHaveBeenCalledWith({ message: "Invalid chat ID. Must be a number." });

@@ -18,7 +18,7 @@ describe("updateChat", () => {
         jsonMock = jest.fn();
 
         req = {
-            params: { chatId: "1" },
+            params: { chat_id: "1" },
             body: { name: "Updated chat message.ts" },
         };
         res = {
@@ -42,7 +42,7 @@ describe("updateChat", () => {
     });
 
     it("should return 400 if chatId is invalid", async () => {
-        req.params!.chatId = "invalid";
+        req.params!.chat_id = "invalid";
 
         await updateChat(req as Request, res as Response);
 

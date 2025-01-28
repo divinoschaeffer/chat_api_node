@@ -5,7 +5,7 @@ import {Chat} from "../../../models/Chat";
 import {handleUpdateChat} from "./updateChatService";
 
 export const updateChat = async (req: Request, res: Response): Promise<void> => {
-    const chatId = parseInt(req.params.chatId);
+    const chatId = parseInt(req.params.chat_id);
     const updateBody = req.body;
 
     if (isNaN(chatId)) {

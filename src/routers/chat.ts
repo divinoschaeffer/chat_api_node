@@ -87,7 +87,7 @@ chatRouter.post('', createChat);
 
 /**
  * @swagger
- * /api/chat/{chatId}:
+ * /api/chat/{chat_id}:
  *   get:
  *     summary: Retrieve a specific chat by ID
  *     description: Fetches the chat data for the given chat ID.
@@ -95,7 +95,7 @@ chatRouter.post('', createChat);
  *      - Chat
  *     parameters:
  *       - in: path
- *         name: chatId
+ *         name: chat_id
  *         required: true
  *         description: The ID of the chat to retrieve.
  *         schema:
@@ -115,11 +115,11 @@ chatRouter.post('', createChat);
  *       500:
  *         description: Server error
  */
-chatRouter.get('/:chatId', getChat);
+chatRouter.get('/:chat_id', getChat);
 
 /**
  * @swagger
- * /api/chat/{chatId}:
+ * /api/chat/{chat_id}:
  *   patch:
  *     summary: Update a specific chat by ID
  *     description: Updates the chat data for the given chat ID with the provided name.
@@ -127,7 +127,7 @@ chatRouter.get('/:chatId', getChat);
  *      - Chat
  *     parameters:
  *       - in: path
- *         name: chatId
+ *         name: chat_id
  *         required: true
  *         description: The ID of the chat to update.
  *         schema:
@@ -160,11 +160,11 @@ chatRouter.get('/:chatId', getChat);
  *       500:
  *         description: Server error
  */
-chatRouter.patch('/:chatId', updateChat);
+chatRouter.patch('/:chat_id', updateChat);
 
 /**
  * @swagger
- * /api/chat/{chatId}:
+ * /api/chat/{chat_id}:
  *   delete:
  *     summary: Delete a specific chat by ID
  *     description: Deletes the chat with the specified chat ID.
@@ -172,7 +172,7 @@ chatRouter.patch('/:chatId', updateChat);
  *      - Chat
  *     parameters:
  *       - in: path
- *         name: chatId
+ *         name: chat_id
  *         required: true
  *         description: The ID of the chat to delete.
  *         schema:
@@ -185,8 +185,8 @@ chatRouter.patch('/:chatId', updateChat);
  *       500:
  *         description: Server error.
  */
-chatRouter.delete('/:chatId', deleteChat);
+chatRouter.delete('/:chat_id', deleteChat);
 
-chatRouter.use('/:chatId/message', messageRouter);
+chatRouter.use('/:chat_id/message', messageRouter);
 
 export default chatRouter;
