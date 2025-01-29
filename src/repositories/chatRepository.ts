@@ -12,6 +12,7 @@ export const isExisting = async (users_id: number[]): Promise<boolean> => {
     const result = await database<Chat>('chats')
         .join('users_chats', 'users_chats.chat_id', '=', 'chats.id')
         .whereIn('users_chats.user_id', users_id)
+        .where('deleted_at', null)
         .groupBy('chats.id')
         .havingRaw('COUNT(DISTINCT users_chats.user_id) = ?', [users_id.length])
         .select('chats.id');
@@ -67,7 +68,8 @@ export const store = async (chat: Chat): Promise<Chat> => {
 export const update = async (chat: Chat): Promise<void> => {
     await database('chats')
         .update('name', chat.name)
-        .where('id', chat.id!);
+        .where('id', chat.id!)
+        .where('deleted_at', null);
 }
 
 export const getChatById = async (chatId: number): Promise<Chat|null> => {
@@ -76,6 +78,7 @@ export const getChatById = async (chatId: number): Promise<Chat|null> => {
         .leftJoin('users_chats', 'users_chats.chat_id', '=', 'chats.id')
         .leftJoin('users', 'users.id', '=', 'users_chats.user_id')
         .where('chats.id', chatId)
+        .where('deleted_at', null);
 
     return chatFromDB(result);
 }

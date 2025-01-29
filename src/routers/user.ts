@@ -1,5 +1,6 @@
 import {Router} from "express";
 import {getUserController} from "../features/user/get/getUserController";
+import {getUserChatsController} from "../features/user/chat/getUserChatsController";
 
 const userRouter: Router = Router();
 
@@ -34,5 +35,7 @@ const userRouter: Router = Router();
  *         description: Server error.
  */
 userRouter.get('/:user_name', getUserController);
+
+userRouter.get('/:user_id/chat', getUserChatsController);
 
 export default userRouter;

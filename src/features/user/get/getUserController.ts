@@ -6,7 +6,7 @@ export const getUserController = async (req: Request, res: Response): Promise<vo
     const userName: string = req.params.user_name;
 
     if (userName === '') {
-        res.status(400).json({message: "Params userName undefined"});
+        res.status(400).json({message: "Params user_name undefined"});
     }
 
     try {
