@@ -17,7 +17,7 @@ describe("getChat Controller", () => {
         statusMock = jest.fn().mockReturnThis();
         jsonMock = jest.fn();
 
-        req = { params: { chatId: '1' } };
+        req = { params: { chat_id: '1' } };
         res = {
             status: statusMock,
             json: jsonMock,

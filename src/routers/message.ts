@@ -16,7 +16,7 @@ const messageRouter: Router = Router({mergeParams: true});
 
 /**
  * @swagger
- * /api/chat/{chatId}/message:
+ * /api/chat/{chat_id}/message:
  *   post:
  *     summary: Create a new message with optional image uploads
  *     description: Creates a new message in a specific chat and optionally uploads up to two images.
@@ -24,7 +24,7 @@ const messageRouter: Router = Router({mergeParams: true});
  *       - Message
  *     parameters:
  *       - in: path
- *         name: chatId
+ *         name: chat_id
  *         required: true
  *         description: The ID of the chat where the message will be created.
  *         schema:
@@ -69,7 +69,7 @@ messageRouter.post('', upload.array('images', 2), createMessage);
 
 /**
  * @swagger
- * /api/chat/{chatId}/message:
+ * /api/chat/{chat_id}/message:
  *   get:
  *     summary: Get a paginated list of messages for a specific chat
  *     description: Retrieve messages for a chat, paginated 50 by 50, sorted from the most recent to the oldest.
@@ -135,6 +135,6 @@ messageRouter.get('', listingMessageController);
  *       500:
  *         description: Server error.
  */
-messageRouter.delete('/:messageId', deleteMessageController);
+messageRouter.delete('/:message_id', deleteMessageController);
 
 export default messageRouter;

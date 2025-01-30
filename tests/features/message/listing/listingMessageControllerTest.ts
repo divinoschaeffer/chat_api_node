@@ -1,8 +1,8 @@
 import { listingMessageController } from "../../../../src/features/messages/listing/listingMessageController";
-import { handleListingMessage } from "../../../../src/features/messages/listing/listingMesssageService";
+import { handleListingMessage } from "../../../../src/features/messages/listing/listingMessageService";
 import { Request, Response } from "express";
 
-jest.mock("../../../../src/features/messages/listing/listingMesssageService");
+jest.mock("../../../../src/features/messages/listing/listingMessageService");
 
 describe("listingMessageController", () => {
     let req: Partial<Request>;
@@ -11,7 +11,7 @@ describe("listingMessageController", () => {
     beforeEach(() => {
         req = {
             params: {
-                chatId: "123",
+                chat_id: "123",
             },
             query: {
                 limit: "10",
@@ -26,7 +26,7 @@ describe("listingMessageController", () => {
     });
 
     it("should return 400 if chatId is not a valid number", async () => {
-        req.params!.chatId = "invalid";
+        req.params!.chat_id = "invalid";
 
         await listingMessageController(req as Request, res as Response);
 

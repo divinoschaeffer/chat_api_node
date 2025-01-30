@@ -1,5 +1,8 @@
 import database from "../database";
 import {User} from "../models/User";
+import {Chat} from "../models/Chat";
+import {getChatColumns} from "./chatRepository";
+import {chatFromDBList} from "./factories/chatFactory";
 
 export const isExisting = async (userName: string, userEmail: string): Promise<boolean> => {
     const result: User[] = await database<User>('users')
@@ -12,6 +15,12 @@ export const isExisting = async (userName: string, userEmail: string): Promise<b
 export const getUserByEmail = async (email: string): Promise<User|undefined> => {
     return database<User>('users')
         .where('email', email)
+        .first();
+}
+
+export const getUserByName = async (userName: string): Promise<User|undefined> => {
+    return database<User>('users')
+        .where('name', userName)
         .first();
 }
 
@@ -42,6 +51,19 @@ export const store = async (user: User): Promise<User> => {
     }
 
     return userResult;
+}
+
+export const getAllChat =  async (userId: number): Promise<Chat[]> => {
+    const result = await database('chats')
+        .select(getChatColumns())
+        .leftJoin('users_chats', 'users_chats.chat_id', '=', 'chats.id')
+        .leftJoin('users', 'users.id', '=', 'users_chats.user_id')
+        .whereIn('chat_id',
+            database.select('chat_id').from('users_chats').where('user_id', userId)
+        )
+        .where('deleted_at', null);
+
+    return chatFromDBList(result)
 }
 
 export const getUserColumns = (): string[] => {

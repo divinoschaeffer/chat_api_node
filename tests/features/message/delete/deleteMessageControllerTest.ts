@@ -11,7 +11,7 @@ describe("deleteMessageController", () => {
     beforeEach(() => {
         req = {
             params: {
-                messageId: "123",
+                message_id: "123",
             },
         };
         res = {
@@ -21,7 +21,7 @@ describe("deleteMessageController", () => {
     });
 
     it("should return 400 if messageId is not a valid number", async () => {
-        req.params!.messageId = "invalid";
+        req.params!.message_id = "invalid";
 
         await deleteMessageController(req as Request, res as Response);
 
