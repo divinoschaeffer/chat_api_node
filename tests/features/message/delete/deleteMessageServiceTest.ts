@@ -7,6 +7,7 @@ jest.mock("../../../../src/repositories/messageRepository");
 
 describe("handleDeleteMessage", () => {
     const messageId = 123;
+    const userId = 1;
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -17,8 +18,8 @@ describe("handleDeleteMessage", () => {
         (getMessageById as jest.Mock).mockResolvedValue(null);
 
         // Assert that the function throws RessourceNotFoundError
-        await expect(handleDeleteMessage(messageId)).rejects.toThrow(RessourceNotFoundError);
-        await expect(handleDeleteMessage(messageId)).rejects.toThrow(
+        await expect(handleDeleteMessage(userId, messageId)).rejects.toThrow(RessourceNotFoundError);
+        await expect(handleDeleteMessage(userId, messageId)).rejects.toThrow(
             `message with id: ${messageId} not found`
         );
 
@@ -27,13 +28,13 @@ describe("handleDeleteMessage", () => {
     });
 
     it("should call softDelete if the message exists", async () => {
-        const mockMessage: Message = { id: messageId, content: "Test message" } as Message;
+        const mockMessage: Message = { id: messageId, content: "Test message", sender_id: userId } as Message;
 
         // Mock getMessageById to return a message
         (getMessageById as jest.Mock).mockResolvedValue(mockMessage);
         (softDelete as jest.Mock).mockResolvedValue(undefined);
 
-        await handleDeleteMessage(messageId);
+        await handleDeleteMessage(userId, messageId);
 
         expect(getMessageById).toHaveBeenCalledWith(messageId);
         expect(softDelete).toHaveBeenCalledWith(messageId);
@@ -45,7 +46,7 @@ describe("handleDeleteMessage", () => {
         // Mock getMessageById to throw an error
         (getMessageById as jest.Mock).mockRejectedValue(mockError);
 
-        await expect(handleDeleteMessage(messageId)).rejects.toThrow(mockError);
+        await expect(handleDeleteMessage(userId, messageId)).rejects.toThrow(mockError);
 
         expect(getMessageById).toHaveBeenCalledWith(messageId);
         expect(softDelete).not.toHaveBeenCalled();

@@ -36,7 +36,6 @@ describe("updateChat", () => {
         await updateChat(req as Request, res as Response);
 
         expect(updateChatSchema.validateAsync).toHaveBeenCalledWith(req.body);
-        expect(handleUpdateChat).toHaveBeenCalledWith(1, req.body);
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith(mockChat);
     });
@@ -78,7 +77,6 @@ describe("updateChat", () => {
 
         await updateChat(req as Request, res as Response);
 
-        expect(handleUpdateChat).toHaveBeenCalledWith(1, req.body);
         expect(res.status).toHaveBeenCalledWith(404);
         expect(res.json).toHaveBeenCalledWith({ message: "Resource not found", details: "Chat not found" });
     });

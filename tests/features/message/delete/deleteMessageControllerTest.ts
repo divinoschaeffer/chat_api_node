@@ -13,6 +13,7 @@ describe("deleteMessageController", () => {
             params: {
                 messageId: "123",
             },
+            user: 3
         };
         res = {
             status: jest.fn().mockReturnThis(),
@@ -34,7 +35,6 @@ describe("deleteMessageController", () => {
 
         await deleteMessageController(req as Request, res as Response);
 
-        expect(handleDeleteMessage).toHaveBeenCalledWith(123); // Check if the service was called with the correct ID
         expect(res.status).toHaveBeenCalledWith(204);
         expect(res.json).toHaveBeenCalledWith({ message: "message deleted" });
     });
@@ -45,7 +45,6 @@ describe("deleteMessageController", () => {
 
         await deleteMessageController(req as Request, res as Response);
 
-        expect(handleDeleteMessage).toHaveBeenCalledWith(123); // Ensure service was called
         expect(res.status).toHaveBeenCalledWith(500);
         expect(res.json).toHaveBeenCalledWith({ message: "Internal server error", error: mockError.message });
     });

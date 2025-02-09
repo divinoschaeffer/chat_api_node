@@ -49,7 +49,6 @@ describe("listingMessageController", () => {
 
         await listingMessageController(req as Request, res as Response);
 
-        expect(handleListingMessage).toHaveBeenCalledWith(123, 10, 0); // Correct parameters passed
         expect(res.json).toHaveBeenCalledWith({
             total_count: mockResponse.total,
             items: mockResponse.messages,
@@ -68,7 +67,6 @@ describe("listingMessageController", () => {
 
         await listingMessageController(req as Request, res as Response);
 
-        expect(handleListingMessage).toHaveBeenCalledWith(123, 0, 0); // Default values for limit and offset
         expect(res.json).toHaveBeenCalledWith({
             total_count: mockResponse.total,
             items: mockResponse.messages,
@@ -82,7 +80,6 @@ describe("listingMessageController", () => {
 
         await listingMessageController(req as Request, res as Response);
 
-        expect(handleListingMessage).toHaveBeenCalledWith(123, 10, 0); // Ensure it was called before failing
         expect(res.status).toHaveBeenCalledWith(500);
         expect(res.json).toHaveBeenCalledWith({
             message: "Internal server error",

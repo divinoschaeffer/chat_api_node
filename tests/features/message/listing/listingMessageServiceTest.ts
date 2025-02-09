@@ -23,7 +23,7 @@ describe("handleListingMessage", () => {
     it("should throw RessourceNotFoundError if the chat is not found", async () => {
         (getChatById as jest.Mock).mockResolvedValue(null);
 
-        await expect(handleListingMessage(123, 10, 0)).rejects.toThrow(RessourceNotFoundError);
+        await expect(handleListingMessage(1, 123, 10, 0)).rejects.toThrow(RessourceNotFoundError);
         expect(getChatById).toHaveBeenCalledWith(123);
     });
 
@@ -32,7 +32,7 @@ describe("handleListingMessage", () => {
         (list as jest.Mock).mockResolvedValue(mockMessages);
         (count as jest.Mock).mockResolvedValue(2);
 
-        const result = await handleListingMessage(123, 10, 0);
+        const result = await handleListingMessage(1, 123, 10, 0);
 
         expect(getChatById).toHaveBeenCalledWith(123);
         expect(list).toHaveBeenCalledWith(123, 10, 0);
@@ -49,7 +49,7 @@ describe("handleListingMessage", () => {
         (list as jest.Mock).mockResolvedValue([]);
         (count as jest.Mock).mockResolvedValue(0);
 
-        const result = await handleListingMessage(123, 10, 0);
+        const result = await handleListingMessage(1, 123, 10, 0);
 
         expect(getChatById).toHaveBeenCalledWith(123);
         expect(list).toHaveBeenCalledWith(123, 10, 0);
@@ -65,7 +65,7 @@ describe("handleListingMessage", () => {
         (getChatById as jest.Mock).mockResolvedValue(mockChat);
         (list as jest.Mock).mockRejectedValue(new Error("List error"));
 
-        await expect(handleListingMessage(123, 10, 0)).rejects.toThrow("List error");
+        await expect(handleListingMessage(1, 123, 10, 0)).rejects.toThrow("List error");
         expect(getChatById).toHaveBeenCalledWith(123);
         expect(list).toHaveBeenCalledWith(123, 10, 0);
     });
@@ -73,7 +73,7 @@ describe("handleListingMessage", () => {
     it("should propagate errors from getChatById function", async () => {
         (getChatById as jest.Mock).mockRejectedValue(new Error("Database error"));
 
-        await expect(handleListingMessage(123, 10, 0)).rejects.toThrow("Database error");
+        await expect(handleListingMessage(1, 123, 10, 0)).rejects.toThrow("Database error");
         expect(getChatById).toHaveBeenCalledWith(123);
     });
 });
