@@ -1,4 +1,5 @@
 import swaggerJsDoc from "swagger-jsdoc";
+import fs from "fs";
 
 const swaggerOptions = {
     swaggerDefinition: {
@@ -16,5 +17,9 @@ const swaggerOptions = {
     },
     apis: ['./src/routers/*.ts', "./src/models/*.ts"],
 };
+
+const swaggerSpec = swaggerJsDoc(swaggerOptions);
+
+fs.writeFileSync("./swagger.json", JSON.stringify(swaggerSpec, null, 2));
 
 export const specs: Object = swaggerJsDoc(swaggerOptions);
