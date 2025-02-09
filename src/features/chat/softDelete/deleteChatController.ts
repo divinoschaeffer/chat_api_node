@@ -3,7 +3,8 @@ import {RessourceNotFoundError} from "../../../utils/RessourceNotFoundError";
 import {handleDeleteChat} from "./deleteChatService";
 
 export const deleteChat = async (req: Request, res: Response): Promise<void> => {
-    const chatId = parseInt(req.params.chatId);
+    const chatId: number = parseInt(req.params.chatId);
+    const userId: number = req.user!;
 
     if (isNaN(chatId)) {
         res.status(400).json({ message: "Invalid chat ID. Must be a number." });
@@ -11,7 +12,7 @@ export const deleteChat = async (req: Request, res: Response): Promise<void> => 
     }
 
     try {
-        await handleDeleteChat(chatId)
+        await handleDeleteChat(userId, chatId)
         res.status(204).json({ message: "Chat deleted"});
     } catch (error: any) {
         if (error instanceof RessourceNotFoundError) {

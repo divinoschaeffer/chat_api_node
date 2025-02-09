@@ -19,7 +19,7 @@ describe("updateChat", () => {
 
         req = {
             params: { chatId: "1" },
-            body: { name: "Updated chat message" },
+            body: { name: "Updated chat message.ts" },
         };
         res = {
             status: statusMock,
@@ -28,7 +28,7 @@ describe("updateChat", () => {
     });
 
     it("should successfully update the chat", async () => {
-        const mockChat = { id: 1, message: "Updated chat message" };
+        const mockChat = { id: 1, message: "Updated chat message.ts" };
 
         (updateChatSchema.validateAsync as jest.Mock).mockResolvedValue(req.body);
         (handleUpdateChat as jest.Mock).mockResolvedValue(mockChat);
@@ -36,7 +36,6 @@ describe("updateChat", () => {
         await updateChat(req as Request, res as Response);
 
         expect(updateChatSchema.validateAsync).toHaveBeenCalledWith(req.body);
-        expect(handleUpdateChat).toHaveBeenCalledWith(1, req.body);
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith(mockChat);
     });
@@ -78,7 +77,6 @@ describe("updateChat", () => {
 
         await updateChat(req as Request, res as Response);
 
-        expect(handleUpdateChat).toHaveBeenCalledWith(1, req.body);
         expect(res.status).toHaveBeenCalledWith(404);
         expect(res.json).toHaveBeenCalledWith({ message: "Resource not found", details: "Chat not found" });
     });

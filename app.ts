@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import helmet from "helmet";
 import swaggerUi from 'swagger-ui-express';
 import {specs} from "./swagger";
+import {handleErrorMiddleware} from "./src/middleware/handleErrorMiddleware";
 
 dotenv.config()
 
@@ -23,6 +24,8 @@ app.get("/", (req: Request, res: Response): void => {
 });
 
 app.use('/api', apiRouter);
+
+app.use(handleErrorMiddleware)
 
 app.listen(port, function(){
     console.log('Listening on port %d', port)

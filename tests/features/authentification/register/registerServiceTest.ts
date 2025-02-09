@@ -1,4 +1,4 @@
-import {handleRegister} from "../../../../src/features/authentification/register/registerService";
+import {handleRegister} from "../../../../src/features/authentication/register/registerService";
 import {isExisting, store} from "../../../../src/repositories/userRepository";
 import {AlreadyExistsError} from "../../../../src/utils/AlreadyExistsError";
 import bcrypt from "bcrypt";

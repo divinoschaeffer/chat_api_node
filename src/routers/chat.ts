@@ -3,6 +3,8 @@ import {createChat} from "../features/chat/create/createChatController";
 import {getChat} from "../features/chat/get/getChatController";
 import {updateChat} from "../features/chat/update/updateChatController";
 import {deleteChat} from "../features/chat/softDelete/deleteChatController";
+import messageRouter from "./message";
+import {authenticateToken} from "../middleware/authenticationMiddleware";
 
 const chatRouter: Router = Router();
 
@@ -150,11 +152,8 @@ chatRouter.get('/:chatId', getChat);
  *             schema:
  *               type: object
  *               properties:
- *                 chatId:
- *                   type: string
- *                 name:
- *                   type: string
- *                   description: The updated name of the chat.
+ *                 chat:
+ *                      $ref: '#/components/schemas/Chat'
  *       400:
  *         description: Invalid input
  *       404:
@@ -188,5 +187,7 @@ chatRouter.put('/:chatId', updateChat);
  *         description: Server error.
  */
 chatRouter.delete('/:chatId', deleteChat);
+
+chatRouter.use('/:chatId/message', messageRouter);
 
 export default chatRouter;

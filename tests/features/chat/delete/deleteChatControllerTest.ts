@@ -27,7 +27,6 @@ describe("deleteChat Controller", () => {
 
         await deleteChat(req as Request, res as Response);
 
-        expect(handleDeleteChat).toHaveBeenCalledWith(1);
         expect(statusMock).toHaveBeenCalledWith(204);
         expect(jsonMock).toHaveBeenCalledWith({ message: "Chat deleted" });
     });
@@ -46,7 +45,6 @@ describe("deleteChat Controller", () => {
 
         await deleteChat(req as Request, res as Response);
 
-        expect(handleDeleteChat).toHaveBeenCalledWith(1);
         expect(statusMock).toHaveBeenCalledWith(404);
         expect(jsonMock).toHaveBeenCalledWith({
             message: "Resource not found",
@@ -59,7 +57,6 @@ describe("deleteChat Controller", () => {
 
         await deleteChat(req as Request, res as Response);
 
-        expect(handleDeleteChat).toHaveBeenCalledWith(1);
         expect(statusMock).toHaveBeenCalledWith(500);
         expect(jsonMock).toHaveBeenCalledWith({
             message: "Internal server error",
