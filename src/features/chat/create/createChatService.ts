@@ -6,6 +6,7 @@ import {getUserById} from "../../../repositories/userRepository";
 import {RessourceNotFoundError} from "../../../utils/RessourceNotFoundError";
 import {createDtoFromUser} from "../../../models/UserDTO";
 import {ChatType} from "../../../models/ChatType";
+import {UnauthorizedActionError} from "../../../utils/UnauthorizedActionError";
 
 export const handleCreateChat = async (values: any): Promise<Chat> => {
     const exist: boolean = await isExisting(values.users);
@@ -22,6 +23,17 @@ export const handleCreateChat = async (values: any): Promise<Chat> => {
             return user;
         })
     );
+
+    let valid = true;
+    users.map((user) => {
+        if (user.id == values.authUser) {
+            valid = true;
+        }
+    });
+
+    if (!valid) {
+        throw new UnauthorizedActionError("Cannot create Chat without authenticated user");
+    }
 
     let name: string = values.name;
     if (name == undefined) {

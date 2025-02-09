@@ -5,6 +5,7 @@ import {RessourceNotFoundError} from "../../../utils/RessourceNotFoundError";
 
 export const getChat = async (req: Request, res: Response): Promise<void> => {
     const chatId: number = parseInt(req.params.chatId);
+    const userId: number = req.user!;
 
     if (isNaN(chatId)) {
         res.status(400).json({ message: "Invalid chat ID. Must be a number." });
@@ -12,7 +13,7 @@ export const getChat = async (req: Request, res: Response): Promise<void> => {
     }
 
     try {
-        const chat: Chat = await handleGetChat(chatId);
+        const chat: Chat = await handleGetChat(userId, chatId);
         res.json(chat);
     } catch (error: any) {
         if (error instanceof RessourceNotFoundError) {

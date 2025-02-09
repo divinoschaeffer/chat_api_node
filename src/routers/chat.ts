@@ -4,6 +4,7 @@ import {getChat} from "../features/chat/get/getChatController";
 import {updateChat} from "../features/chat/update/updateChatController";
 import {deleteChat} from "../features/chat/softDelete/deleteChatController";
 import messageRouter from "./message";
+import {authenticateToken} from "../middleware/authenticationMiddleware";
 
 const chatRouter: Router = Router();
 

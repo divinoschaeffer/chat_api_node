@@ -1,14 +1,14 @@
-import { register } from "../../../../src/features/authentification/register/registerController";
+import { register } from "../../../../src/features/authentication/register/registerController";
 import createUserSchema from "../../../../src/validationSchema/createUserSchema";
-import { handleRegister } from "../../../../src/features/authentification/register/registerService";
-import { handleCreateToken } from "../../../../src/features/authentification/token/createTokenService";
+import { handleRegister } from "../../../../src/features/authentication/register/registerService";
+import { handleCreateToken } from "../../../../src/features/authentication/token/createTokenService";
 import { createDtoFromUser } from "../../../../src/models/UserDTO";
 import { AlreadyExistsError } from "../../../../src/utils/AlreadyExistsError";
 import { Request, Response } from "express";
 
 jest.mock("../../../../src/validationSchema/createUserSchema");
-jest.mock("../../../../src/features/authentification/register/registerService");
-jest.mock("../../../../src/features/authentification/token/createTokenService");
+jest.mock("../../../../src/features/authentication/register/registerService");
+jest.mock("../../../../src/features/authentication/token/createTokenService");
 jest.mock("../../../../src/models/UserDTO");
 
 describe("register", () => {

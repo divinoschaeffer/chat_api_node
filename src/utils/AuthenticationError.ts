@@ -1,6 +1,6 @@
-export class AuthentificationError extends Error {
+export class AuthenticationError extends Error {
     constructor(msg: string) {
         super(msg);
-        Object.setPrototypeOf(this, AuthentificationError.prototype);
+        Object.setPrototypeOf(this, AuthenticationError.prototype);
     }
 }

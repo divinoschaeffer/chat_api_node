@@ -9,6 +9,7 @@ export const createChat = async (req: Request, res: Response): Promise<void> => 
 
     try {
         const result = await createChatSchema.validateAsync(chatBody);
+        result.authUser = req.user;
         const chat: Chat = await handleCreateChat(result);
         res.status(201).json(chat);
     } catch (error: any) {

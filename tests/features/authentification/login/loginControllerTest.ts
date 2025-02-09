@@ -1,14 +1,14 @@
-import { login } from "../../../../src/features/authentification/login/loginController";
+import { login } from "../../../../src/features/authentication/login/loginController";
 import loginSchema from "../../../../src/validationSchema/loginSchema";
-import { handleLogin } from "../../../../src/features/authentification/login/loginService";
-import { handleCreateToken } from "../../../../src/features/authentification/token/createTokenService";
+import { handleLogin } from "../../../../src/features/authentication/login/loginService";
+import { handleCreateToken } from "../../../../src/features/authentication/token/createTokenService";
 import { createDtoFromUser } from "../../../../src/models/UserDTO";
 import { RessourceNotFoundError } from "../../../../src/utils/RessourceNotFoundError";
 import { Request, Response } from "express";
 
 jest.mock("../../../../src/validationSchema/loginSchema");
-jest.mock("../../../../src/features/authentification/login/loginService");
-jest.mock("../../../../src/features/authentification/token/createTokenService");
+jest.mock("../../../../src/features/authentication/login/loginService");
+jest.mock("../../../../src/features/authentication/token/createTokenService");
 jest.mock("../../../../src/models/UserDTO");
 
 describe("login", () => {

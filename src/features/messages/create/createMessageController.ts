@@ -6,6 +6,7 @@ import {Message} from "../../../models/Message";
 
 export const createMessage = async (req: Request, res: Response): Promise<void> => {
     const chatId: number = parseInt(req.params.chatId);
+    const userId: number = req.user!;
     const messageBody = req.body;
     const files = req.files as Express.Multer.File[] ?? [];
 
@@ -16,7 +17,7 @@ export const createMessage = async (req: Request, res: Response): Promise<void> 
 
     try {
         const result = await createMessageSchema.validateAsync(messageBody);
-        const message: Message = await handleCreateMessage(chatId, result, files);
+        const message: Message = await handleCreateMessage(userId, chatId, result, files);
         res.status(201).json(message);
     } catch (error: any) {
         if (error.isJoi) {

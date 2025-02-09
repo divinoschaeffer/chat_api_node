@@ -7,11 +7,12 @@ jest.mock("../../../../src/repositories/chatRepository");
 describe('handleGetChat', () => {
     it('should return a chat when the id is valid', async () => {
         const chatId = 1;
+        const userId = 1;
         const mockChat = { id: chatId, message: "Hello" };
 
         (getChatById as jest.Mock).mockResolvedValue(mockChat);
 
-        const result = await handleGetChat(chatId);
+        const result = await handleGetChat(userId, chatId);
 
         expect(result).toEqual(mockChat);
         expect(getChatById).toHaveBeenCalledWith(chatId);
@@ -19,10 +20,11 @@ describe('handleGetChat', () => {
 
     it('should throw a RessourceNotFoundError when the chat is not found', async () => {
         const chatId = 999;
+        const userId = 122;
 
         (getChatById as jest.Mock).mockResolvedValue(null);
 
-        await expect(handleGetChat(chatId)).rejects.toThrowError(
+        await expect(handleGetChat(userId, chatId)).rejects.toThrowError(
             new RessourceNotFoundError(`Chat with id: ${chatId} not found`)
         );
         expect(getChatById).toHaveBeenCalledWith(chatId);

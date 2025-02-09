@@ -3,6 +3,7 @@ import {handleListingMessage} from "./listingMesssageService";
 
 export const listingMessageController = async  (req: Request, res: Response): Promise<void> => {
     const chatId: number = parseInt(req.params.chatId);
+    const userId: number = req.user!;
     const limit: number = req.query.limit ? parseInt(<string>req.query.limit) : 0;
     const offset: number = req.query.offset ? parseInt(<string>req.query.offset) : 0;
 
@@ -12,7 +13,7 @@ export const listingMessageController = async  (req: Request, res: Response): Pr
     }
 
     try {
-        const {total, messages} = await handleListingMessage(chatId, limit, offset);
+        const {total, messages} = await handleListingMessage(userId, chatId, limit, offset);
         res.json({
             total_count: total,
             items: messages

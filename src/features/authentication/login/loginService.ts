@@ -2,7 +2,7 @@ import {User} from "../../../models/User";
 import {getUserByEmail} from "../../../repositories/userRepository";
 import bcrypt from "bcrypt";
 import {RessourceNotFoundError} from "../../../utils/RessourceNotFoundError";
-import {AuthentificationError} from "../../../utils/AuthentificationError";
+import {AuthenticationError} from "../../../utils/AuthenticationError";
 
 export const handleLogin = async (value: any): Promise<User> => {
     const user: User|undefined = await getUserByEmail(value.email);
@@ -12,7 +12,7 @@ export const handleLogin = async (value: any): Promise<User> => {
     const valid = await bcrypt.compare(value.password, user.password);
 
     if (!valid) {
-        throw new AuthentificationError("Wrong password");
+        throw new AuthenticationError("Wrong password");
     }
     return user;
 }

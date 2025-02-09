@@ -6,6 +6,7 @@ import {handleUpdateChat} from "./updateChatService";
 
 export const updateChat = async (req: Request, res: Response): Promise<void> => {
     const chatId = parseInt(req.params.chatId);
+    const userId: number = req.user!;
     const updateBody = req.body;
 
     if (isNaN(chatId)) {
@@ -15,7 +16,7 @@ export const updateChat = async (req: Request, res: Response): Promise<void> => 
 
     try {
         const result = await updateChatSchema.validateAsync(updateBody);
-        const chat: Chat = await handleUpdateChat(chatId, result);
+        const chat: Chat = await handleUpdateChat(userId, chatId, result);
         res.status(200).json(chat);
     } catch (error: any) {
         if (error.isJoi) {

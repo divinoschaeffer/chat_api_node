@@ -1,4 +1,4 @@
-import { handleCreateToken } from "../../../../src/features/authentification/token/createTokenService";
+import { handleCreateToken } from "../../../../src/features/authentication/token/createTokenService";
 import jwt from "jsonwebtoken";
 
 jest.mock("jsonwebtoken");

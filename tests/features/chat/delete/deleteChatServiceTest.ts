@@ -17,7 +17,7 @@ describe("handleDeleteChat Service", () => {
         (getChatById as jest.Mock).mockResolvedValue(mockChat);
         (softDelete as jest.Mock).mockResolvedValue(undefined);
 
-        await handleDeleteChat(1);
+        await handleDeleteChat(1,1);
 
         expect(getChatById).toHaveBeenCalledWith(1);
         expect(softDelete).toHaveBeenCalledWith(1);
@@ -26,8 +26,8 @@ describe("handleDeleteChat Service", () => {
     it("should throw RessourceNotFoundError if the chat does not exist", async () => {
         (getChatById as jest.Mock).mockResolvedValue(null);
 
-        await expect(handleDeleteChat(1)).rejects.toThrow(RessourceNotFoundError);
-        await expect(handleDeleteChat(1)).rejects.toThrow("Chat with id: 1 not found");
+        await expect(handleDeleteChat(1, 1)).rejects.toThrow(RessourceNotFoundError);
+        await expect(handleDeleteChat(1, 1)).rejects.toThrow("Chat with id: 1 not found");
 
         expect(getChatById).toHaveBeenCalledWith(1);
         expect(softDelete).not.toHaveBeenCalled();
@@ -37,7 +37,7 @@ describe("handleDeleteChat Service", () => {
         (getChatById as jest.Mock).mockResolvedValue(mockChat);
         (softDelete as jest.Mock).mockRejectedValue(new Error("Unexpected error"));
 
-        await expect(handleDeleteChat(1)).rejects.toThrow("Unexpected error");
+        await expect(handleDeleteChat(1, 1)).rejects.toThrow("Unexpected error");
 
         expect(getChatById).toHaveBeenCalledWith(1);
         expect(softDelete).toHaveBeenCalledWith(1);
